@@ -22,7 +22,7 @@ Lemon es una red social de evaluación de los conocimientos adquiridos en Nextjs
 > se puede clonar o hacer un fork del repositorio
 
 ```
-git clone repo_url
+git clone https://github.com/Ivan-Navas/next_lemon.git
 ```
 
 2. Instalar las dependencias necesarias
