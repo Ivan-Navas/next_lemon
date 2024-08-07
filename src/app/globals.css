@@ -30,4 +30,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  @layer base {
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/Roboto.woff2) format('woff2');
+  }
 }
+}
+
