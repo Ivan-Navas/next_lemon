@@ -4,7 +4,8 @@ Lemon es una red social de evaluación de los conocimientos adquiridos en Nextjs
 
 ### Diseño en figma 
 
-[Figma](https://www.figma.com/design/bwufG0l2VWNRaDYN9QLDts/RedSocial?node-id=110-2&t=cgQsn5RT27EChxwk-1)
+[Figma](https://www.figma.com/design/bwufG0l2VWNRaDYN9QLDts/RedSocial?node-id=110-2&t=cgQsn5RT27EChxwk-1)  
+![figma_ui](https://res.cloudinary.com/ivannavas/image/upload/v1723004681/red_social/documentation/okkigvjvt8qft0lebpmj.svg)
 
 > [!NOTE]
 > solo es para visualizacion, NO permite editar
