@@ -1,7 +1,9 @@
+'use client'
 import Link from "next/link";
 import React from "react";
 import { image } from "@/helpers/images";
 import { BiHide, BiShow } from "react-icons/bi";
+import Image from 'next/image'
 
 function Page() {
   return (
@@ -9,15 +11,19 @@ function Page() {
       <div className="w-1000 h-700 bg-back rounded-16 grid grid-cols-login ">
         <div className="rounded-l-16  bg-login flex items-center justify-center">
           <div className="w-300 h-300 rounded-50% bg-glass border border-white grid items-center justify-center relative ">
-            <img
-              className="w-207 h-192 absolute top-50 left-50"
+            <Image
+              className="absolute top-50 left-50"
               src={image.logo}
               alt="LogoImage"
+              width={207}
+              height={192}
             />
-            <img
-              className="absolute top-185 left-175"
+            <Image
+              className="w-100 h-100 absolute top-185 left-175"
               src={image.name}
               alt="nameWeb"
+              width={100}
+              height={100}
             />
           </div>
         </div>
@@ -42,8 +48,8 @@ function Page() {
                 autoComplete="none"
                 name="password"
               />
-              <button className="w-20 h-20 absolute bottom-0 right-0 cursor-pointer border-none bg-transparent">
-                <BiHide className="text-rose" />
+              <button aria-label="hidePassword" type="button" className="w-24 h-24 absolute bottom-0 right-0 cursor-pointer border-none bg-transparent">
+                <BiHide className="w-24 h-24  text-rose" />
               </button>
             </div>
             <div className="w-full relative mt-16 flex">
@@ -54,7 +60,7 @@ function Page() {
                 Olvidé mi contraseña
               </Link>
             </div>
-            <button className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 ">
+            <button type="submit" className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 ">
               Confirmar
             </button>
             <p className="text-16 text-inputText font-bold mt-17">
@@ -74,7 +80,7 @@ function Page() {
               className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 "
               href=""
             >
-              <img className="w-36 h-36" src={image.google} alt="GoogleIcon" />
+              <Image width={36} height={36} className="w-36 h-36" src={image.google} alt="GoogleIcon" />
             </Link>
           </div>
         </div>
