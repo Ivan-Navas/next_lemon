@@ -1,9 +1,10 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React from "react";
 import { image } from "@/helpers/images";
 import { BiHide, BiShow } from "react-icons/bi";
-import Image from 'next/image'
+import Image from "next/image";
+import Input from "@/app/components/Input";
 
 function Page() {
   return (
@@ -32,23 +33,16 @@ function Page() {
             Iniciar sesíon
           </h2>
           <form className="grid items-center justify-center">
-            <input
-              className="w-363 h-20 outline-none font-bold border border-transparent border-b-inputBorder text-inputText bg-back mt-131 placeholder:text-inputText placeholder:font-bold "
-              type="email"
-              placeholder="Correo"
-              name="email"
-              autoFocus
-            />
-            <div className="relative">
-              <input
-                className="w-363 h-20 outline-none font-bold border border-transparent border-b-inputBorder text-inputText bg-back  mt-63 inputLogin passwordInput placeholder:text-inputText placeholder:font-bold "
-                type="password"
-                placeholder="Contraseña"
-                maxLength={16}
-                autoComplete="none"
-                name="password"
-              />
-              <button aria-label="hidePassword" type="button" className="w-24 h-24 absolute bottom-0 right-0 cursor-pointer border-none bg-transparent">
+            <div className="mt-131">
+              <Input type="email" placeholder="Correo" name="email" />
+            </div>
+            <div className="relative mt-63">
+              <Input type="password" placeholder="Contraseña" name="password" />
+              <button
+                aria-label="hidePassword"
+                type="button"
+                className="w-24 h-24 absolute bottom-0 right-0 cursor-pointer border-none bg-transparent"
+              >
                 <BiHide className="w-24 h-24  text-rose" />
               </button>
             </div>
@@ -60,7 +54,10 @@ function Page() {
                 Olvidé mi contraseña
               </Link>
             </div>
-            <button type="submit" className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 ">
+            <button
+              type="submit"
+              className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 "
+            >
               Confirmar
             </button>
             <p className="text-16 text-inputText font-bold mt-17">
@@ -80,7 +77,13 @@ function Page() {
               className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 "
               href=""
             >
-              <Image width={36} height={36} className="w-36 h-36" src={image.google} alt="GoogleIcon" />
+              <Image
+                width={36}
+                height={36}
+                className="w-36 h-36"
+                src={image.google}
+                alt="GoogleIcon"
+              />
             </Link>
           </div>
         </div>
