@@ -1,12 +1,18 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { image } from "@/helpers/images";
 import { BiHide, BiShow } from "react-icons/bi";
 import Image from "next/image";
 import Input from "@/app/components/Input";
+import { useAppContext } from "@/context";
 
 function Page() {
+  const {
+    authMessage,
+    setAuthMessage,
+    login,
+  } = useAppContext();
   return (
     <div className="w-screen h-screen grid items-center justify-center ">
       <div className="w-1000 h-700 bg-back rounded-16 grid grid-cols-login ">
@@ -32,12 +38,26 @@ function Page() {
           <h2 className="text-center text-40 font-bold mt-35">
             Iniciar sesíon
           </h2>
+
+          <div className="h-20 mt-109 flex items-center justify-center">
+            {authMessage === "success" && (
+              <h2 className="text-16 text-green-500 font-bold">
+                Iniciando sesíon...
+              </h2>
+            )}
+            {authMessage === "error" && (
+              <h2 className="text-16 text-red-500 font-bold">
+                La contraseña o correo son incorrectos
+              </h2>
+            )}
+          </div>
+
           <form className="grid items-center justify-center">
-            <div className="mt-131">
+            <div className="mt-16">
               <Input type="email" placeholder="Correo" name="email" />
             </div>
             <div className="relative mt-63">
-              <Input type="password" placeholder="Contraseña" name="password" />
+              <Input type="password" placeholder="Contraseña" name="password" autocomplete="off" />
               <button
                 aria-label="hidePassword"
                 type="button"
@@ -55,6 +75,9 @@ function Page() {
               </Link>
             </div>
             <button
+              onClick={(e)=>{
+                login(e);
+              }}
               type="submit"
               className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 "
             >

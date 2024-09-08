@@ -41,3 +41,14 @@ body {
 }
 }
 
+input {
+  caret-color: rgba(255,255,255,0.7); /* aquí el color del cursor*/
+}
+
+input:-webkit-autofill {
+  @apply border-0 !important; /* Elimina el borde */
+  -webkit-box-shadow: 0 0 0 1000px #2F2F2F inset !important; /* Quita el borde y fondo */
+  box-shadow: 0 0 0 1000px #2F2F2F inset !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.7);
+  caret-color: rgba(255,255,255,0.7); /* Cambia el color del cursor */
+}

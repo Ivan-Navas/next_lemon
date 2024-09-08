@@ -20,15 +20,16 @@ export const POST = async (req: any, res: any) => {
     
     if(exist){
     return NextResponse.json({
-      status: "succes",
+      status: "success",
       message: "Logeado con exito",
       user: {
        id: exist.id,
        name: exist.name,
-       email: exist.email,
        nickName: exist.nickName,
+       email: exist.email,
+       image: exist.image,
+       post
       },
-      post
     });
 
     }else{
@@ -42,7 +43,7 @@ export const POST = async (req: any, res: any) => {
 
   } catch (error) {
     return NextResponse.json({
-      status: "success",
+      status: "error",
       message: "Ha ocurrido un error",
       error,
     });
