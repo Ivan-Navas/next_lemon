@@ -23,7 +23,7 @@ function Page() {
               height={192}
             />
             <Image
-              className="w-100 h-100 absolute top-185 left-175"
+              className="w-auto h-auto absolute top-185 left-175"
               src={image.name}
               alt="nameWeb"
               width={100}
@@ -58,7 +58,7 @@ function Page() {
                 type={hidePassword === true ? "password" : "text"}
                 placeholder="Contraseña"
                 name="password"
-                autocomplete="off"
+                autoComplete="off"
               />
               <button
                 aria-label="hidePassword"
@@ -110,7 +110,6 @@ function Page() {
               <Image
                 width={36}
                 height={36}
-                className="w-36 h-36"
                 src={image.google}
                 alt="GoogleIcon"
               />
