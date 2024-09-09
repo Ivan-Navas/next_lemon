@@ -6,10 +6,13 @@ import React, { createContext, useContext, useState } from "react";
 const AppContext = createContext<ContextType>({
   authMessage: "",
   setAuthMessage: () => {},
+  hidePassword: true,
+  setHidePassword: () => {},
   login: () => {},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
+  const [hidePassword, setHidePassword] = useState<boolean>(true)
   const [authMessage, setAuthMessage] = useState<string>("");
   const [auth, setAuth] = useState<Auth>({
     email: "",
@@ -44,11 +47,17 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const hideInputPassword = ()=>{
+
+  }
+
   return (
     <AppContext.Provider
       value={{
         authMessage,
         setAuthMessage,
+        hidePassword,
+        setHidePassword,
         login,
       }}
     >

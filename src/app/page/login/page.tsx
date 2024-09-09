@@ -8,11 +8,8 @@ import Input from "@/app/components/Input";
 import { useAppContext } from "@/context";
 
 function Page() {
-  const {
-    authMessage,
-    setAuthMessage,
-    login,
-  } = useAppContext();
+  const { authMessage, setAuthMessage, hidePassword, setHidePassword, login } =
+    useAppContext();
   return (
     <div className="w-screen h-screen grid items-center justify-center ">
       <div className="w-1000 h-700 bg-back rounded-16 grid grid-cols-login ">
@@ -57,13 +54,23 @@ function Page() {
               <Input type="email" placeholder="Correo" name="email" />
             </div>
             <div className="relative mt-63">
-              <Input type="password" placeholder="Contraseña" name="password" autocomplete="off" />
+              <Input
+                type={hidePassword === true ? "password" : "text"}
+                placeholder="Contraseña"
+                name="password"
+                autocomplete="off"
+              />
               <button
                 aria-label="hidePassword"
                 type="button"
                 className="w-24 h-24 absolute bottom-0 right-0 cursor-pointer border-none bg-transparent"
+                onClick={() => setHidePassword(!hidePassword)}
               >
-                <BiHide className="w-24 h-24  text-rose" />
+                {hidePassword === true ? (
+                  <BiHide className="w-24 h-24  text-rose" />
+                ) : (
+                  <BiShow className="w-24 h-24  text-rose" />
+                )}
               </button>
             </div>
             <div className="w-full relative mt-16 flex">
@@ -75,7 +82,7 @@ function Page() {
               </Link>
             </div>
             <button
-              onClick={(e)=>{
+              onClick={(e) => {
                 login(e);
               }}
               type="submit"
