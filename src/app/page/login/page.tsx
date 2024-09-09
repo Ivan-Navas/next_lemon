@@ -92,7 +92,7 @@ function Page() {
             </button>
             <p className="text-16 text-inputText font-bold mt-17">
               ¿No tienes cuenta?
-              <Link className="text-rose text-16 ml-1" href="/page/register">
+              <Link className="gradient-text text-16 ml-1" href="/page/register">
                 Crea una.
               </Link>
             </p>

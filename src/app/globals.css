@@ -52,3 +52,11 @@ input:-webkit-autofill {
   -webkit-text-fill-color: rgba(255,255,255,0.7);
   caret-color: rgba(255,255,255,0.7); /* Cambia el color del cursor */
 }
+
+.gradient-text {
+  background: linear-gradient(90deg, #87DBFF, #EAC7FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
