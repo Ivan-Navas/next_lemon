@@ -36,21 +36,8 @@ function Page() {
             Iniciar sesíon
           </h2>
 
-          <div className="h-20 mt-109 flex items-center justify-center">
-            {authMessage === "success" && (
-              <h2 className="text-16 text-green-500 font-bold">
-                Iniciando sesíon...
-              </h2>
-            )}
-            {authMessage === "error" && (
-              <h2 className="text-16 text-red-500 font-bold">
-                La contraseña o correo son incorrectos
-              </h2>
-            )}
-          </div>
-
-          <form className="grid items-center justify-center">
-            <div className="mt-16">
+          <form className="mt-131 grid items-center justify-center">
+            <div className="">
               <Input type="email" placeholder="Correo" name="email" />
             </div>
             <div className="relative mt-63">
@@ -74,6 +61,18 @@ function Page() {
               </button>
             </div>
             <div className="w-full relative mt-16 flex">
+              {authMessage === "success" && (
+                <h2 className="text-12 text-success font-bold">
+                  Iniciando sesíon...
+                </h2>
+              )}
+              {authMessage === "error" && (
+                <div className="w-1/2">
+                  <h2 className="text-12 text-error font-bold">
+                    La contraseña o correo son incorrectos
+                  </h2>
+                </div>
+              )}
               <Link
                 className="text-right text-inputText font-12 font-light absolute right-0 hover:decoration-slice"
                 href=""
@@ -92,7 +91,10 @@ function Page() {
             </button>
             <p className="text-16 text-inputText font-bold mt-17">
               ¿No tienes cuenta?
-              <Link className="gradient-text text-16 ml-1" href="/page/register">
+              <Link
+                className="gradient-text text-16 ml-1"
+                href="/page/register"
+              >
                 Crea una.
               </Link>
             </p>

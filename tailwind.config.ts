@@ -59,6 +59,8 @@ const config: Config = {
         "inputBorder": "#87DBFF",
         "rose": "#EAC7FF",
         "inputText": "rgba(255,255,255, 0.7)",
+        "success": "#AFF468",
+        "error": "#FF003A",
       },
       margin: {
         "16": "16px",
@@ -67,7 +69,7 @@ const config: Config = {
         "35": "35px",
         "40": "40px",
         "63": "63px",
-        "109": "109px",
+        "131": "131px",
       },
       padding:{
         "6": "6px",
