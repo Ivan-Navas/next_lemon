@@ -2,19 +2,27 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { image } from "@/helpers/images";
-import { BiHide, BiShow } from "react-icons/bi";
+import { BiHide, BiShow, BiMoon, BiSun } from "react-icons/bi";
 import Image from "next/image";
 import Input from "@/app/components/Input";
 import { useAppContext } from "@/context";
 
 function Page() {
-  const { authMessage, setAuthMessage, hidePassword, setHidePassword, login } =
-    useAppContext();
+  const {
+    authMessage,
+    setAuthMessage,
+    hidePassword,
+    setHidePassword,
+    login,
+    theme,
+    setTheme,
+    handleChangeTheme,
+  } = useAppContext();
   return (
-    <div className="w-screen h-screen grid items-center justify-center ">
-      <div className="w-1000 h-700 bg-back rounded-16 grid grid-cols-login ">
+    <div className="w-screen h-screen bg-lBackMain grid items-center justify-center dark:bg-title ">
+      <div className="w-1000 h-700 bg-lBack rounded-16 grid grid-cols-login dark:bg-back ">
         <div className="rounded-l-16  bg-login flex items-center justify-center">
-          <div className="w-300 h-300 rounded-50% bg-glass border border-white grid items-center justify-center relative ">
+          <div className="w-300 h-300 rounded-50% bg-glass border border-white grid items-center justify-center relative">
             <Image
               className="absolute top-50 left-50"
               src={image.logo}
@@ -32,13 +40,32 @@ function Page() {
           </div>
         </div>
         <div className="relative ">
-          <h2 className="text-center text-40 font-bold mt-35">
+          <div className="w-36 h-36 bg-glassDark absolute top-10 right-10 rounded-4 flex items-center justify-center dark:bg-glass">
+            <button
+              aria-label="theme"
+              className="w-20 h-20 flex items-center justify-center"
+              onClick={handleChangeTheme}
+            >
+              {theme === "light" ? (
+                <BiMoon className="w-20 h-20 text-title" />
+              ) : (
+                <BiSun className="w-20 h-20 text-white" />
+              )}
+            </button>
+          </div>
+
+          <h2 className="text-center text-title text-40 font-bold mt-35 dark:text-white">
             Iniciar sesíon
           </h2>
 
           <form className="mt-131 grid items-center justify-center">
             <div className="">
-              <Input type="email" placeholder="Correo" name="email" />
+              <Input
+                type="email"
+                placeholder="Correo"
+                name="email"
+                autoComplete="off"
+              />
             </div>
             <div className="relative mt-63">
               <Input
@@ -74,7 +101,7 @@ function Page() {
                 </div>
               )}
               <Link
-                className="text-right text-inputText font-12 font-light absolute right-0 hover:decoration-slice"
+                className="text-right text-textL font-12 font-light absolute right-0 hover:decoration-slice dark:text-inputText"
                 href=""
               >
                 Olvidé mi contraseña
@@ -89,7 +116,7 @@ function Page() {
             >
               Confirmar
             </button>
-            <p className="text-16 text-inputText font-bold mt-17">
+            <p className="text-16 text-textL font-bold mt-17 dark:text-inputText">
               ¿No tienes cuenta?
               <Link
                 className="gradient-text text-16 ml-1"
@@ -100,7 +127,9 @@ function Page() {
             </p>
             <div className="grid grid-cols-oLine items-center justify-between ">
               <hr className="h-1 border-none bg-button " />
-              <b className="text-16 text-center font-bold p-6 ">O</b>
+              <b className="text-16 text-center text-title font-bold p-6 dark:text-white ">
+                O
+              </b>
               <hr className="h-1 border-none bg-button  " />
             </div>
           </form>

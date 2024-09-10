@@ -1,19 +1,28 @@
 "use client";
 import { Auth, AuthRequest } from "@/helpers/interfaces/user";
 import { ContextType } from "@/types/indexTypes";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AppContext = createContext<ContextType>({
   authMessage: "",
   setAuthMessage: () => {},
   hidePassword: true,
   setHidePassword: () => {},
+  theme: "light",
+  setTheme: () => {},
+  handleChangeTheme: () => {},
   login: () => {},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   const [hidePassword, setHidePassword] = useState<boolean>(true)
   const [authMessage, setAuthMessage] = useState<string>("");
+  const [theme, setTheme] = useState<string>(()=> {
+    if(window.matchMedia("(prefers-color-schema: dark)")){
+      return "dark"
+    }
+    return "light"
+  });
   const [auth, setAuth] = useState<Auth>({
     email: "",
     id: 0,
@@ -21,6 +30,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     nickName: "",
     post: [],
   });
+
+  useEffect(()=>{
+    if(theme === "dark") document.querySelector("html")?.classList.add("dark")
+      else document.querySelector("html")?.classList.remove("dark")
+  },[theme])
 
   const login = async (e: any) => {
     e.preventDefault();
@@ -47,8 +61,9 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const hideInputPassword = ()=>{
-
+  const handleChangeTheme = ()=>{
+    if(theme === "light") setTheme("dark");
+    if(theme === "dark") setTheme("light");
   }
 
   return (
@@ -58,6 +73,9 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         setAuthMessage,
         hidePassword,
         setHidePassword,
+        theme,
+        setTheme,
+        handleChangeTheme,
         login,
       }}
     >

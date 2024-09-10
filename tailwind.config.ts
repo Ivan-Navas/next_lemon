@@ -6,6 +6,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
@@ -14,6 +15,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "login": "url('https://res.cloudinary.com/ivannavas/image/upload/v1722542162/red_social/icons/vb1yxs4sbgstehwinjhy.jpg')",
         "glass": "linear-gradient(124deg,rgba(255, 255, 255, 0.1) 14.11%,rgba(255, 255, 255, 0.4) 86.73%)",
+        "glassDark": "linear-gradient(124deg,rgba(123, 123, 123, 0.1) 14.11%,rgba(123, 123, 123, 0.4) 86.73%)",
         "button": "linear-gradient(90deg, #87dbff 4.41%, #eac7ff 111.71%)",
       },
       fontSize:{
@@ -22,6 +24,7 @@ const config: Config = {
         "40": "40px",
       },
       borderRadius: {
+        "4": "4px",
         "16": "16px",
         "50%": "50%",
       },
@@ -41,11 +44,13 @@ const config: Config = {
         "24": "24px",
         "36": "36px",
         "45": "45px",
+        "100": "100%",
         "192": "192px",
         "300": "300px",
         "700": "700px",
       },
       spacing: {
+        "10": "10px",
         "50": "50px",
         "175": "175px",
         "185": "185px",
@@ -56,9 +61,13 @@ const config: Config = {
       },
       colors: {
         "back": "#2F2F2F",
+        "lBackMain": "#F1F1F1",
+        "lBack": "#FFFFFF",
         "inputBorder": "#87DBFF",
         "rose": "#EAC7FF",
         "inputText": "rgba(255,255,255, 0.7)",
+        "textL": "#636363",
+        "title": "#1F1F1F",
         "success": "#AFF468",
         "error": "#FF003A",
       },
