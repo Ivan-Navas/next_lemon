@@ -2,13 +2,16 @@
 import LogoForm from "@/app/components/LogoForm";
 import { useAppContext } from "@/context";
 import { BiMoon, BiSun, BiLeftArrowAlt } from "react-icons/bi";
-import React from "react";
+import React, { useEffect } from "react";
 import RegisterForm from "@/app/components/RegisterForm";
 import Link from "next/link";
 import ButtonFormGlass from "@/app/components/ui/ButtonFormGlass";
 
 function Page() {
   const { theme, handleChangeTheme } = useAppContext();
+  useEffect(()=>{
+    document.title = "Lemon • Register"
+  },[])
   return (
     <div className="w-screen h-screen bg-lBackMain grid items-center justify-center dark:bg-title">
       <div className="w-1000 h-700 bg-lBack rounded-16 grid grid-cols-login dark:bg-back ">

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { image } from "@/helpers/images";
 import { BiMoon, BiSun } from "react-icons/bi";
 import Image from "next/image";
@@ -11,6 +11,9 @@ import ButtonFormGlass from "@/app/components/ui/ButtonFormGlass";
 
 function Page() {
   const { theme, handleChangeTheme } = useAppContext();
+  useEffect(()=>{
+    document.title = "Lemon • Login"
+  },[])
   return (
     <div className="w-screen h-screen bg-lBackMain grid items-center justify-center dark:bg-title ">
       <div className="w-1000 h-700 bg-lBack rounded-16 grid grid-cols-login dark:bg-back ">
