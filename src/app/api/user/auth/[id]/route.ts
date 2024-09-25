@@ -2,7 +2,7 @@ import { prisma } from "@/libs/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
-export const GET = async ({ params }: any) => {
+export const GET = async (req: NextApiRequest, { params }: any) => {
   try {
     const userId = params.id;
     const user = await prisma.user.findUnique({
@@ -26,6 +26,7 @@ export const GET = async ({ params }: any) => {
           email: user?.email,
           nickName: user?.nickName,
           image: user?.image,
+          bio: user?.bio,
           post: user?.post,
           follower: user?.followers,
           following: user?.following,
