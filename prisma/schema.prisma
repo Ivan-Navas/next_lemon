@@ -17,6 +17,7 @@ model User {
   image String?
   nickName String
   password String
+  bio String?
   post Post[]
   followers Follower[] @relation("FollowerRelation")
   following Follower[] @relation("FollowedRelation")
@@ -31,7 +32,7 @@ model Follower {
 
 model Post {
   id Int @id @default(autoincrement())
-  date DateTime 
+  date DateTime @default(now())
   data String
   image String?
   author User @relation(fields: [authorId], references: [id])
