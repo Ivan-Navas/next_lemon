@@ -14,10 +14,19 @@ model User {
   id Int @id @default(autoincrement())
   email String @unique
   name String
-  image String
+  image String?
   nickName String
   password String
   post Post[]
+  followers Follower[] @relation("FollowerRelation")
+  following Follower[] @relation("FollowedRelation")
+}
+model Follower {
+  id Int @id  @default(autoincrement())
+  follower   User @relation("FollowerRelation", fields: [followerId], references: [id])
+  followed   User @relation("FollowedRelation", fields: [followedId], references: [id])
+  followerId Int
+  followedId Int
 }
 
 model Post {
