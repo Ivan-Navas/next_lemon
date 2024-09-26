@@ -1,15 +1,20 @@
-"use client";
-import React from "react";
+'use client'
+import React, { useState } from "react";
 import Link from "next/link";
 import { BiHide, BiShow } from "react-icons/bi";
 import Input from "@/app/components/Input";
 import { useAppContext } from "@/context";
-// import { useRouter } from 'next/router';
+import { User } from "@/helpers/interfaces/user";
 
 function LoginForm() {
-  // const router = useRouter();
-  const { hidePassword, setHidePassword, authMessage, login, auth } =
-    useAppContext();
+  const {
+    hidePassword,
+    setHidePassword,
+    authMessage,
+    login,
+    handleInputChange,
+  } = useAppContext();
+
   return (
     <form className="mt-131 grid items-center justify-center">
       <div className="">
@@ -18,6 +23,7 @@ function LoginForm() {
           placeholder="Correo"
           name="email"
           autoComplete="off"
+          onChange={handleInputChange}
         />
       </div>
       <div className="relative mt-63">
@@ -26,6 +32,7 @@ function LoginForm() {
           placeholder="Contraseña"
           name="password"
           autoComplete="off"
+          onChange={handleInputChange}
         />
         <button
           aria-label="hidePassword"
@@ -67,7 +74,7 @@ function LoginForm() {
         type="submit"
         className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button  mt-40 "
       >
-        <Link href="/page/feed">Confirmar</Link>
+        Confirmar
       </button>
       <p className="text-16 text-textL font-bold mt-17 dark:text-inputText">
         ¿No tienes cuenta?

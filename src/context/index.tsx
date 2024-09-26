@@ -1,8 +1,8 @@
 "use client";
-import { Auth, AuthRequest } from "@/helpers/interfaces/user";
+import { Auth, AuthRequest, User } from "@/helpers/interfaces/user";
 import { ContextType } from "@/types/indexTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 const AppContext = createContext<ContextType>({
   authMessage: "",
@@ -21,9 +21,14 @@ const AppContext = createContext<ContextType>({
     image: "",
     bio: "",
   },
+  handleInputChange: () => {},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
+  const [formLoginData, setFormLoginData] = useState<User>({
+    email: "",
+    password: "",
+  });
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [authMessage, setAuthMessage] = useState<string>("");
   const [theme, setTheme] = useState<string>(() => {
@@ -49,14 +54,10 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (e: any) => {
     e.preventDefault();
-    const data = {
-      email: "ivanrng1502@gmail.com",
-      password: "1234",
-    };
     try {
       const request = await fetch("/api/user/login", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(formLoginData),
       });
       const requestData: AuthRequest = await request.json();
       if (requestData.status === "success") {
@@ -68,8 +69,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         );
         const authData: AuthRequest = await authRequest.json();
         setAuth(authData.user);
-        Cookies.set("auth", JSON.stringify(authData.user), {expires: 30})
+        Cookies.set("auth", JSON.stringify(authData.user), { expires: 30 });
         setAuthMessage("success");
+        setTimeout(() => {
+          window.location.href = "/page/feed";
+        }, 1000);
       } else {
         setAuthMessage("error");
       }
@@ -84,6 +88,14 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     if (theme === "dark") setTheme("light");
   };
 
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormLoginData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -96,6 +108,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         handleChangeTheme,
         login,
         auth,
+        handleInputChange,
       }}
     >
       {children}

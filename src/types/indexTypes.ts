@@ -10,4 +10,5 @@ export type ContextType = {
   handleChangeTheme: () => void;
   login: (e: any) => void;
   auth: Auth
+  handleInputChange: (e: any)=> void;
 };
