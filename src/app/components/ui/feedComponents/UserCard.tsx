@@ -1,8 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { BiSolidEditAlt } from "react-icons/bi";
+import Cookies from "js-cookie";
+import { Auth } from "@/helpers/interfaces/user";
 
 function UserCard() {
+  const cookies = Cookies.get("auth");
+  const auth: Auth = cookies ? JSON.parse(cookies) : null;
   return (
     <div className="w-30% h-100 bg-white rounded-16 px-16 py-8 flex items-start dark:bg-back">
       <button
@@ -12,9 +16,7 @@ function UserCard() {
       >
         <Image
           className="rounded-100%"
-          src={
-            "https://res.cloudinary.com/ivannavas/image/upload/v1723778090/red_social/perfil_images/yjnufaycsjyphf62p5bj.jpg"
-          }
+          src={auth.image}
           width={70}
           height={70}
           alt="userImage"
@@ -24,29 +26,34 @@ function UserCard() {
         <div className="flex">
           <div className="w-100 h-35 bg-lBackMain flex items-center dark:bg-backL">
             <h2 className="text-title text-30 font-medium dark:text-white">
-              ivanrng
+              {auth.nickName}
             </h2>
           </div>
           <button className="w-36 h-36" type="button" aria-label="editUser">
             <BiSolidEditAlt className="w-36 h-36 text-title" />
           </button>
         </div>
-        <p className="text-12 text-title font-medium dark:text-lBackMain">
-          alert(`esta es mi biografia`)
-        </p>
+        {auth.bio && (
+          <p className="text-12 text-title font-medium dark:text-lBackMain">
+            {auth.bio}
+          </p>
+        )}
         <div className="w-100% h-22 bg-lBackMain flex items-center mt-24 dark:bg-backL">
           <h2 className="text-20 text-title font-medium dark:text-lBackMain">
-            12 Seguidores
+            {auth.follower?.length}{" "}
+            {auth.follower?.length !== 1 ? <>Seguidores</> : <>Seguidor</>}
           </h2>
         </div>
         <div className="w-100% h-22 bg-lBackMain flex items-center mt-8 dark:bg-backL">
           <h2 className="text-20 text-title font-medium dark:text-lBackMain">
-            4 Seguidos
+            {auth.following?.length}{" "}
+            {auth.following?.length !== 1 ? <>Seguidos</> : <>Seguido</>}
           </h2>
         </div>
         <div className="w-100% h-22 bg-lBackMain flex items-center mt-8 dark:bg-backL">
           <h2 className="text-20 text-title font-medium dark:text-lBackMain">
-            8 Publicaciones
+            {auth.post?.length}{" "}
+            {auth.post?.length !== 1 ? <>Publicaciónes</> : <>Publicacion</>}
           </h2>
         </div>
       </div>

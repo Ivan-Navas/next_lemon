@@ -5,12 +5,21 @@ export interface User {
   password: string,
 }
 
+interface Follow {
+  id: number,
+  followerId: number,
+  followedId: number,
+}
 export interface Auth {
   id: number,
   name: string,
   nickName: string,
   email: string,
-  post: Post[],
+  image: string,
+  bio: string,
+  post?: Post[],
+  follower?: Follow[],
+  following?: Follow[],
 }
 
 export interface AuthRequest {

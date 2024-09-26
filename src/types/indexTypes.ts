@@ -1,3 +1,5 @@
+import { Auth } from "@/helpers/interfaces/user";
+
 export type ContextType = {
   authMessage: string;
   setAuthMessage: (authMessage: string) => void;
@@ -7,4 +9,5 @@ export type ContextType = {
   setTheme: (theme: string) => void;
   handleChangeTheme: () => void;
   login: (e: any) => void;
+  auth: Auth
 };

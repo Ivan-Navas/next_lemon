@@ -2,6 +2,7 @@
 import { Auth, AuthRequest } from "@/helpers/interfaces/user";
 import { ContextType } from "@/types/indexTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import Cookies from 'js-cookie';
 
 const AppContext = createContext<ContextType>({
   authMessage: "",
@@ -12,35 +13,45 @@ const AppContext = createContext<ContextType>({
   setTheme: () => {},
   handleChangeTheme: () => {},
   login: () => {},
+  auth: {
+    id: 0,
+    email: "",
+    name: "",
+    nickName: "",
+    image: "",
+    bio: "",
+  },
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
-  const [hidePassword, setHidePassword] = useState<boolean>(true)
+  const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [authMessage, setAuthMessage] = useState<string>("");
-  const [theme, setTheme] = useState<string>(()=> {
-    if(window.matchMedia("(prefers-color-schema: dark)")){
-      return "dark"
+  const [theme, setTheme] = useState<string>(() => {
+    if (window.matchMedia("(prefers-color-schema: dark)")) {
+      return "dark";
     }
-    return "light"
+    return "light";
   });
   const [auth, setAuth] = useState<Auth>({
     email: "",
     id: 0,
     name: "",
     nickName: "",
+    image: "",
+    bio: "",
     post: [],
   });
 
-  useEffect(()=>{
-    if(theme === "dark") document.querySelector("html")?.classList.add("dark")
-      else document.querySelector("html")?.classList.remove("dark")
-  },[theme])
+  useEffect(() => {
+    if (theme === "dark") document.querySelector("html")?.classList.add("dark");
+    else document.querySelector("html")?.classList.remove("dark");
+  }, [theme]);
 
   const login = async (e: any) => {
     e.preventDefault();
     const data = {
-      email: "test@gmail.com",
-      password: "test",
+      email: "ivanrng1502@gmail.com",
+      password: "1234",
     };
     try {
       const request = await fetch("/api/user/login", {
@@ -48,9 +59,16 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         body: JSON.stringify(data),
       });
       const requestData: AuthRequest = await request.json();
-      console.log(requestData)
       if (requestData.status === "success") {
-        setAuth(requestData.user);
+        const authRequest = await fetch(
+          `/api/user/auth/${requestData.user.id}`,
+          {
+            method: "GET",
+          }
+        );
+        const authData: AuthRequest = await authRequest.json();
+        setAuth(authData.user);
+        Cookies.set("auth", JSON.stringify(authData.user), {expires: 30})
         setAuthMessage("success");
       } else {
         setAuthMessage("error");
@@ -61,10 +79,10 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const handleChangeTheme = ()=>{
-    if(theme === "light") setTheme("dark");
-    if(theme === "dark") setTheme("light");
-  }
+  const handleChangeTheme = () => {
+    if (theme === "light") setTheme("dark");
+    if (theme === "dark") setTheme("light");
+  };
 
   return (
     <AppContext.Provider
@@ -77,6 +95,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         setTheme,
         handleChangeTheme,
         login,
+        auth,
       }}
     >
       {children}
