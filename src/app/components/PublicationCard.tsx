@@ -25,10 +25,9 @@ function PublicationCard({
   date,
   image,
 }: Props) {
-
-  const { formatDate } = useAppContext()
+  const { formatDate } = useAppContext();
   return (
-    <div className="flex">
+    <div className="flex px-18 py-34">
       <div>
         <Image
           className="rounded-full"

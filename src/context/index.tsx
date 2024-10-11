@@ -23,10 +23,10 @@ const AppContext = createContext<ContextType>({
     bio: "",
   },
   handleInputChange: () => {},
-  getFeed: ()=>{},
+  getFeed: () => {},
   feed: [],
-  setFeed: ()=>{},
-  formatDate: ()=>"",
+  setFeed: () => {},
+  formatDate: () => "",
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -103,23 +103,23 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }));
   };
 
-  const getFeed = async ()=>{
+  const getFeed = async () => {
     try {
       const request = await fetch("/api/publication/feed", {
         method: "GET",
-      })
+      });
       const feedData: FeedRequest = await request.json();
       setFeed(feedData.feed);
     } catch (error) {
       console.log("Ocurrió un error", error);
     }
-  }
+  };
 
   function formatDate(date: Date) {
-    return date.toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
     });
   }
 
