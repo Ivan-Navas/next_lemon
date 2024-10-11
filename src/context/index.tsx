@@ -26,6 +26,7 @@ const AppContext = createContext<ContextType>({
   getFeed: ()=>{},
   feed: [],
   setFeed: ()=>{},
+  formatDate: ()=>"",
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -109,10 +110,17 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       })
       const feedData: FeedRequest = await request.json();
       setFeed(feedData.feed);
-      console.log(feedData.feed)
     } catch (error) {
       console.log("Ocurrió un error", error);
     }
+  }
+
+  function formatDate(date: Date) {
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
   }
 
   return (
@@ -131,6 +139,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         getFeed,
         feed,
         setFeed,
+        formatDate,
       }}
     >
       {children}

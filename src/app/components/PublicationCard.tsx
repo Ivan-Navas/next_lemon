@@ -6,6 +6,7 @@ import {
   BiSolidHeart,
   BiBarChart,
 } from "react-icons/bi";
+import { useAppContext } from "@/context";
 
 interface Props {
   title: string;
@@ -24,6 +25,8 @@ function PublicationCard({
   date,
   image,
 }: Props) {
+
+  const { formatDate } = useAppContext()
   return (
     <div className="flex">
       <div>
@@ -41,7 +44,7 @@ function PublicationCard({
             {user}
           </h2>
           <h2 className="text-title text-10 font-medium dark:text-9f">
-            @{nickName} | {date}
+            @{nickName} | {formatDate(new Date(date))}
           </h2>
           <h2 className="text-title text-20 font-medium mt-10 dark:text-white">
             {title}

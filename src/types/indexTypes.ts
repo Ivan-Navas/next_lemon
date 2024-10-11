@@ -15,4 +15,5 @@ export type ContextType = {
   getFeed: ()=> void;
   feed: Post[];
   setFeed: (post: Post[])=> void;
+  formatDate: (date: Date) => string;
 };
