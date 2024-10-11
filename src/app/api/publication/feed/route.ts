@@ -4,7 +4,11 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req: NextApiRequest)=>{
   try {
-  const feed = await prisma.post.findMany()
+  const feed = await prisma.post.findMany(
+    {include: {
+      author: true,
+    }}
+  )
   return NextResponse.json({
     status: "success",
     message: "Feed",

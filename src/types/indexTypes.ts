@@ -1,3 +1,4 @@
+import { Post } from "@/helpers/interfaces/post";
 import { Auth } from "@/helpers/interfaces/user";
 
 export type ContextType = {
@@ -11,4 +12,7 @@ export type ContextType = {
   login: (e: any) => void;
   auth: Auth
   handleInputChange: (e: any)=> void;
+  getFeed: ()=> void;
+  feed: Post[];
+  setFeed: (post: Post[])=> void;
 };

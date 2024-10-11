@@ -3,6 +3,7 @@ import { Auth, AuthRequest, User } from "@/helpers/interfaces/user";
 import { ContextType } from "@/types/indexTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { FeedRequest, Post } from "@/helpers/interfaces/post";
 
 const AppContext = createContext<ContextType>({
   authMessage: "",
@@ -22,6 +23,9 @@ const AppContext = createContext<ContextType>({
     bio: "",
   },
   handleInputChange: () => {},
+  getFeed: ()=>{},
+  feed: [],
+  setFeed: ()=>{},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -46,10 +50,12 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     bio: "",
     post: [],
   });
+  const [feed, setFeed] = useState<Post[]>([]);
 
   useEffect(() => {
     if (theme === "dark") document.querySelector("html")?.classList.add("dark");
     else document.querySelector("html")?.classList.remove("dark");
+    getFeed();
   }, [theme]);
 
   const login = async (e: any) => {
@@ -96,6 +102,19 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }));
   };
 
+  const getFeed = async ()=>{
+    try {
+      const request = await fetch("/api/publication/feed", {
+        method: "GET",
+      })
+      const feedData: FeedRequest = await request.json();
+      setFeed(feedData.feed);
+      console.log(feedData.feed)
+    } catch (error) {
+      console.log("Ocurrió un error", error);
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -109,6 +128,9 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         login,
         auth,
         handleInputChange,
+        getFeed,
+        feed,
+        setFeed,
       }}
     >
       {children}

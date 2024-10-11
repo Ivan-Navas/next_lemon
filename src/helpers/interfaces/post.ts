@@ -8,3 +8,9 @@ export interface Post {
   author: Auth,
   authorId: number,
 }
+
+export interface FeedRequest {
+  status: string,
+  message: string,
+  feed: Post[],
+}
