@@ -10,7 +10,7 @@ function Page() {
     document.title = "Lemon • Home";
   }, []);
   return (
-    <div className="w-screen h-screen bg-lBackMain p-16 dark:bg-title">
+    <div className="w-screen min-h-screen max-h-100 bg-lBackMain p-16 dark:bg-title">
       <div className="w-100% h-192 flex justify-between">
         <UserCard />
         <SearchCard />
