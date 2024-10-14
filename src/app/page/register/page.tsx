@@ -13,7 +13,7 @@ function Page() {
     document.title = "Lemon • Register"
   },[])
   return (
-    <div className="w-screen h-screen bg-lBackMain grid items-center justify-center dark:bg-title">
+    <div className="w-screen min-h-screen max-h-100 bg-lBackMain grid items-center justify-center dark:bg-title">
       <div className="w-1000 h-700 bg-lBack rounded-16 grid grid-cols-login dark:bg-back ">
         <LogoForm />
         <div className="relative ">
