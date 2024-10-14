@@ -1,5 +1,5 @@
 "use client";
-import { Auth, AuthRequest, User } from "@/helpers/interfaces/user";
+import { Auth, AuthRequest, User, UserExplorer, UserExplorerRequest } from "@/helpers/interfaces/user";
 import { ContextType } from "@/types/indexTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -24,6 +24,8 @@ const AppContext = createContext<ContextType>({
   },
   handleInputChange: () => {},
   getFeed: () => {},
+  userExplorer: [],
+  setUserExplorer: () => {},
   feed: [],
   setFeed: () => {},
   formatDate: () => "",
@@ -51,6 +53,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     bio: "",
     post: [],
   });
+  const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([])
   const [feed, setFeed] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -108,8 +111,13 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       const request = await fetch("/api/publication/feed", {
         method: "GET",
       });
+      const userRequest = await fetch("/api/user/user-explorer",{
+        method: "GET",
+      });
       const feedData: FeedRequest = await request.json();
+      const userData: UserExplorerRequest = await userRequest.json();
       setFeed(feedData.feed);
+      setUserExplorer(userData.list);
     } catch (error) {
       console.log("Ocurrió un error", error);
     }
@@ -136,6 +144,8 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         login,
         auth,
         handleInputChange,
+        userExplorer,
+        setUserExplorer,
         getFeed,
         feed,
         setFeed,

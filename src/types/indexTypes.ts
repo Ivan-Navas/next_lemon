@@ -1,5 +1,5 @@
 import { Post } from "@/helpers/interfaces/post";
-import { Auth } from "@/helpers/interfaces/user";
+import { Auth, UserExplorer } from "@/helpers/interfaces/user";
 
 export type ContextType = {
   authMessage: string;
@@ -13,6 +13,8 @@ export type ContextType = {
   auth: Auth
   handleInputChange: (e: any)=> void;
   getFeed: ()=> void;
+  userExplorer: UserExplorer[];
+  setUserExplorer: (userExplore: UserExplorer[]) => void,
   feed: Post[];
   setFeed: (post: Post[])=> void;
   formatDate: (date: Date) => string;
