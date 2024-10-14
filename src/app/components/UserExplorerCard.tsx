@@ -1,20 +1,14 @@
 import React from "react";
-import { Auth } from "@/helpers/interfaces/user";
 import { BiUserPlus } from "react-icons/bi";
 import Image from "next/image";
-import Cookies from "js-cookie";
 
 interface Props {
-  image: string,
-  name: string,
-  nickName: string,
+  image: string;
+  name: string;
+  nickName: string;
 }
 
-
 function UserExplorerCard({ image, name, nickName }: Props) {
-  const cookies = Cookies.get("auth");
-  const auth: Auth = cookies ? JSON.parse(cookies) : null;
-
   return (
     <div>
       <div className="my-18 flex px-14">
