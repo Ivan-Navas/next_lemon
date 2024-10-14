@@ -35,7 +35,7 @@ function Page() {
             )}
           </Link>
           <h2 className="text-center text-title text-40 font-bold mt-35 dark:text-white">
-            Registrate
+            Regístrate
           </h2>
           <RegisterForm />
         </div>
