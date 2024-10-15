@@ -1,14 +1,19 @@
 import React from "react";
 import { BiUserPlus } from "react-icons/bi";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { Auth } from "@/helpers/interfaces/user";
 
 interface Props {
+  id: number;
   image: string;
   name: string;
   nickName: string;
 }
 
-function UserExplorerCard({ image, name, nickName }: Props) {
+function UserExplorerCard({ id, image, name, nickName }: Props) {
+  const cookies = Cookies.get("auth");
+  const auth: Auth = cookies ? JSON.parse(cookies) : null;
   return (
     <div>
       <div className="my-18 flex px-14">
@@ -29,16 +34,19 @@ function UserExplorerCard({ image, name, nickName }: Props) {
               alt="userImage"
             />
           </button>
-          <button
-            type="button"
-            aria-label="followUser"
-            className="w-20 h-20 absolute -top-4 -right-4 flex items-center justify-center bg-button rounded-100% border border-white z-20 pointer-events-none dark:border-back "
-            onClick={() => {
-              alert("userFollow");
-            }}
-          >
-            <BiUserPlus className="w-15 h-15 text-title" />
-          </button>
+
+          {auth.id !== id && (
+            <button
+              type="button"
+              aria-label="followUser"
+              className="w-20 h-20 absolute -top-4 -right-4 flex items-center justify-center bg-button rounded-100% border border-white z-20 pointer-events-none dark:border-back "
+              onClick={() => {
+                alert("userFollow");
+              }}
+            >
+              <BiUserPlus className="w-15 h-15 text-title" />
+            </button>
+          )}
         </div>
         <div className="ml-15">
           <h2 className="text-20 text-title font-medium dark:text-white">

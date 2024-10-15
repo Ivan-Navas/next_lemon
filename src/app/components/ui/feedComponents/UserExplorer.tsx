@@ -14,6 +14,7 @@ function UserExplorer() {
         return (
           <div key={user.id}>
             <UserExplorerCard
+              id={user.id}
               image={user.image}
               name={user.name} 
               nickName={user.nickName} />
