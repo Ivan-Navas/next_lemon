@@ -12,12 +12,12 @@ function UserExplorer() {
       </h2>
       {userExplorer.map((user) => {
         return (
-          <>
+          <div key={user.id}>
             <UserExplorerCard
               image={user.image}
               name={user.name} 
               nickName={user.nickName} />
-          </>
+          </div>
         );
       })}
     </div>
