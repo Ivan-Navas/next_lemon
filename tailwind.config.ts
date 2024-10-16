@@ -121,6 +121,7 @@ const config: Config = {
         "51": "51px",
         "59": "59px",
         "63": "63px",
+        "121": "121px",
         "131": "131px",
       },
       padding:{

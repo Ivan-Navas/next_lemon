@@ -1,5 +1,13 @@
 "use client";
-import { Auth, AuthRequest, User, UserExplorer, UserExplorerRequest } from "@/helpers/interfaces/user";
+import {
+  Auth,
+  AuthRequest,
+  Message,
+  RegisterUser,
+  User,
+  UserExplorer,
+  UserExplorerRequest,
+} from "@/helpers/interfaces/user";
 import { ContextType } from "@/types/indexTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -8,12 +16,18 @@ import { FeedRequest, Post } from "@/helpers/interfaces/post";
 const AppContext = createContext<ContextType>({
   authMessage: "",
   setAuthMessage: () => {},
+  registerMessage: {
+    status: "",
+    message: "",
+  },
+  setRegisterMessage: () => {},
   hidePassword: true,
   setHidePassword: () => {},
   theme: "light",
   setTheme: () => {},
   handleChangeTheme: () => {},
   login: () => {},
+  register: () => {},
   auth: {
     id: 0,
     email: "",
@@ -23,6 +37,7 @@ const AppContext = createContext<ContextType>({
     bio: "",
   },
   handleInputChange: () => {},
+  handleInputRegisterChange: () => {},
   getFeed: () => {},
   userExplorer: [],
   setUserExplorer: () => {},
@@ -36,8 +51,19 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     email: "",
     password: "",
   });
+  const [formRegisterData, setFormRegisterData] = useState<RegisterUser>({
+    name: "",
+    nickName: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [authMessage, setAuthMessage] = useState<string>("");
+  const [registerMessage, setRegisterMessage] = useState<Message>({
+    status: "",
+    message: "",
+  });
   const [theme, setTheme] = useState<string>(() => {
     if (window.matchMedia("(prefers-color-schema: dark)")) {
       return "dark";
@@ -53,7 +79,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     bio: "",
     post: [],
   });
-  const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([])
+  const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([]);
   const [feed, setFeed] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -93,6 +119,40 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const register = async (e: any) => {
+    e.preventDefault();
+    try {
+      const request = await fetch("/api/user/register", {
+        method: "POST",
+        body: JSON.stringify(formRegisterData),
+      });
+      const requestData: AuthRequest = await request.json();
+      setRegisterMessage({
+        status: requestData.status,
+        message: requestData.message,
+      });
+      if (requestData.status === "success") {
+        const authRequest = await fetch(
+          `/api/user/auth/${requestData.user.id}`,
+          {
+            method: "GET",
+          }
+        );
+        const authData: AuthRequest = await authRequest.json();
+        setAuth(authData.user);
+        Cookies.set("auth", JSON.stringify(authData.user), { expires: 30 });
+        setTimeout(() => {
+          window.location.href = "/page/feed";
+        }, 1000);
+      }
+    } catch (error) {
+      setRegisterMessage({
+        status: "error",
+        message: "Ocurrio un error, intentalo nuevamente",
+      });
+    }
+  };
+
   const handleChangeTheme = () => {
     if (theme === "light") setTheme("dark");
     if (theme === "dark") setTheme("light");
@@ -106,12 +166,20 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }));
   };
 
+  const handleInputRegisterChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormRegisterData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const getFeed = async () => {
     try {
       const request = await fetch("/api/publication/feed", {
         method: "GET",
       });
-      const userRequest = await fetch("/api/user/user-explorer",{
+      const userRequest = await fetch("/api/user/user-explorer", {
         method: "GET",
       });
       const feedData: FeedRequest = await request.json();
@@ -136,14 +204,18 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       value={{
         authMessage,
         setAuthMessage,
+        registerMessage,
+        setRegisterMessage,
         hidePassword,
         setHidePassword,
         theme,
         setTheme,
         handleChangeTheme,
         login,
+        register,
         auth,
         handleInputChange,
+        handleInputRegisterChange,
         userExplorer,
         setUserExplorer,
         getFeed,

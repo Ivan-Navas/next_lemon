@@ -5,6 +5,10 @@ export interface User {
   password: string;
 }
 
+export interface Message {
+  status: string,
+  message: string,
+}
 interface Follow {
   id: number;
   followerId: number;
@@ -22,6 +26,13 @@ export interface Auth {
   following?: Follow[];
 }
 
+export interface RegisterUser {
+  name: string;
+  nickName: string;
+  email: string;
+  password: string;
+  confirm: string;
+}
 export interface UserExplorer {
   id: number;
   name: string;

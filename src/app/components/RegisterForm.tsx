@@ -4,17 +4,18 @@ import { useAppContext } from "@/context";
 import { BiHide, BiShow } from "react-icons/bi";
 
 function RegisterForm() {
-  const { authMessage, login } = useAppContext();
+  const { handleInputRegisterChange, register } = useAppContext();
   const [hidePassword, setHidePassword] = useState<Boolean>(true);
   const [confirmHidePassword, setConfirmHidePassword] = useState<Boolean>(true);
   return (
-    <form className="mt-131 grid items-center justify-center">
+    <form className="mt-1 grid items-center justify-center">
       <div className="mb-51">
         <Input
           type="text"
           placeholder="Nombre"
           name="name"
           autoComplete="off"
+          onChange={handleInputRegisterChange}
         />
       </div>
       <div className="mb-51">
@@ -23,6 +24,7 @@ function RegisterForm() {
           placeholder="Usuario"
           name="nickName"
           autoComplete="off"
+          onChange={handleInputRegisterChange}
         />
       </div>
       <div className="mb-51">
@@ -31,6 +33,7 @@ function RegisterForm() {
           placeholder="Correo"
           name="email"
           autoComplete="off"
+          onChange={handleInputRegisterChange}
         />
       </div>
       <div className="relative mb-51">
@@ -39,6 +42,7 @@ function RegisterForm() {
           placeholder="Contraseña"
           name="password"
           autoComplete="off"
+          onChange={handleInputRegisterChange}
         />
         <button
           aria-label="hidePassword"
@@ -57,8 +61,9 @@ function RegisterForm() {
         <Input
           type={confirmHidePassword === true ? "password" : "text"}
           placeholder="Confirmar contraseña"
-          name="password"
+          name="confirm"
           autoComplete="off"
+          onChange={handleInputRegisterChange}
         />
         <button
           aria-label="hidePassword"
@@ -75,7 +80,7 @@ function RegisterForm() {
       </div>
       <button
         onClick={(e) => {
-          login(e);
+          register(e);
         }}
         type="submit"
         className="w-363 h-45 flex items-center justify-center text-center text-back text-16 font-bold rounded-16 bg-button"
