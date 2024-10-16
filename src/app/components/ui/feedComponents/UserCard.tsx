@@ -8,7 +8,7 @@ function UserCard() {
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
   return (
-    <div className="w-30% h-100 bg-white rounded-16 px-16 py-8 flex items-start dark:bg-back">
+    <div className="w-100% h-192 bg-white rounded-16 px-16 py-8 flex items-start dark:bg-back">
       <button
         type="button"
         aria-label="iconUser"
