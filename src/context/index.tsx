@@ -45,7 +45,17 @@ const AppContext = createContext<ContextType>({
   setFeed: () => {},
   formatDate: () => "",
   modalState: false,
-  setModalState: ()=>{},
+  setModalState: () => {},
+  getUserInfo: () => {},
+  userInfo: {
+    id: 0,
+    bio: "",
+    email: "",
+    image: "",
+    name: "",
+    nickName: "",
+  },
+  setUserInfo: () => {},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -81,9 +91,19 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     bio: "",
     post: [],
   });
+  const [userInfo, setUserInfo] = useState<Auth>({
+    email: "",
+    id: 0,
+    name: "",
+    nickName: "",
+    image: "",
+    bio: "",
+    post: [],
+  });
+
   const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([]);
   const [feed, setFeed] = useState<Post[]>([]);
-  const [modalState, setModalState] = useState<boolean>(true);
+  const [modalState, setModalState] = useState<boolean>(false);
 
   useEffect(() => {
     if (theme === "dark") document.querySelector("html")?.classList.add("dark");
@@ -202,6 +222,21 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     });
   }
 
+  const getUserInfo = async (id: number) => {
+    try {
+      const request = await fetch(`/api/user/auth/${id}`, {
+        method: "GET",
+      });
+      const requestDate: AuthRequest = await request.json();
+      setUserInfo(requestDate.user)
+      if(requestDate.status === "success"){
+        setModalState(true);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -227,6 +262,9 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         formatDate,
         modalState,
         setModalState,
+        getUserInfo,
+        userInfo,
+        setUserInfo,
       }}
     >
       {children}

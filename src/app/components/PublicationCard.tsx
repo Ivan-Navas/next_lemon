@@ -9,6 +9,7 @@ import {
 import { useAppContext } from "@/context";
 
 interface Props {
+  id: number,
   title: string;
   user: string;
   nickName: string;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 function PublicationCard({
+  id,
   title,
   user,
   nickName,
@@ -25,14 +27,14 @@ function PublicationCard({
   date,
   image,
 }: Props) {
-  const { formatDate, setModalState } = useAppContext();
+  const { formatDate, getUserInfo } = useAppContext();
   return (
     <div className="flex px-18 py-34">
       <div>
         <button
           aria-label="userImage"
           type="button"
-          onClick={() => setModalState(true)}
+          onClick={() => getUserInfo(id)}
         >
           <Image
             className="rounded-full"
@@ -48,7 +50,7 @@ function PublicationCard({
           <button
             type="button"
             aria-label="userName"
-            onClick={() => setModalState(true)}
+            onClick={() => getUserInfo(id)}
           >
             <h2 className="text-title text-20 font-medium dark:text-white">
               {user}

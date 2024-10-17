@@ -15,7 +15,7 @@ interface Props {
 function UserExplorerCard({ id, image, name, nickName }: Props) {
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
-  const { setModalState } = useAppContext();
+  const { getUserInfo } = useAppContext();
   return (
     <div>
       <div className="my-18 flex px-14">
@@ -24,7 +24,7 @@ function UserExplorerCard({ id, image, name, nickName }: Props) {
             type="button"
             aria-label="uerExploreButton"
             className="w-50 h-50 z-10"
-            onClick={() => setModalState(true)}
+            onClick={() => getUserInfo(id)}
           >
             <Image
               className="rounded-100%"

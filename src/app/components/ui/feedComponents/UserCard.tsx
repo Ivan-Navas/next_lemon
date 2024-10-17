@@ -8,14 +8,14 @@ import { useAppContext } from "@/context";
 function UserCard() {
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
-  const { setModalState } = useAppContext();
+  const { getUserInfo } = useAppContext();
   return (
     <div className="w-100% h-192 bg-white rounded-16 px-16 py-8 flex items-start dark:bg-back">
       <button
         type="button"
         aria-label="iconUser"
         className="p-1 bg-button rounded-100%"
-        onClick={()=>setModalState(true)}
+        onClick={()=>getUserInfo(auth.id)}
       >
         <Image
           className="rounded-100%"

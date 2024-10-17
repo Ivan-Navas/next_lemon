@@ -17,7 +17,7 @@ import UserStatsCard from "./ui/UserStatsCard";
 import { useAppContext } from "@/context";
 
 function ModalUser() {
-  const { formatDate, modalState } = useAppContext();
+  const { formatDate, modalState, userInfo } = useAppContext();
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
   return (
@@ -46,18 +46,18 @@ function ModalUser() {
               <Image
                 width={70}
                 height={70}
-                src={auth.image}
+                src={userInfo.image}
                 alt="userImage"
                 className="rounded-50%"
               />
             </div>
             <h2 className="text-30 text-title text-center font-extrabold dark:text-lFontMain">
-              {auth.nickName}
+              {userInfo.nickName}
             </h2>
           </div>
-          {auth.bio && (
+          {userInfo.bio && (
             <h2 className="text-14 text-title font-light mt-18 dark:text-lBackMain">
-              {auth.bio}
+              {userInfo.bio}
             </h2>
           )}
           <div className="w-100 mt-31 flex items-center justify-between">
@@ -83,14 +83,14 @@ function ModalUser() {
           <hr className="w-100 h-1 bg-button mt-18 mb-34 border-none" />
           <div>
             <UserStatsCard
-              followers={auth.follower?.length}
-              following={auth.following?.length}
-              publications={auth.post?.length}
+              followers={userInfo.follower?.length}
+              following={userInfo.following?.length}
+              publications={userInfo.post?.length}
               date="02/09/2023"
             />
           </div>
           <hr className="w-100 h-1 bg-button mt-34 mb-41 border-none" />
-          {auth.id === auth.id && (
+          {auth.id === userInfo.id && (
             <button type="button" className="flex items-center justify-center">
               <BiHeart className="w-20 h-20 text-title dark:text-white" />
               <h2 className="text-16 text-title dark:text-white font-extrabold ml-2">

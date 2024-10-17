@@ -24,4 +24,7 @@ export type ContextType = {
   formatDate: (date: Date) => string;
   modalState: boolean;
   setModalState: (modalState: boolean) => void;
+  getUserInfo: (id: number) => void;
+  userInfo: Auth;
+  setUserInfo: (userInfo: Auth) => void;
 };
