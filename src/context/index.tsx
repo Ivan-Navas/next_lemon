@@ -86,8 +86,8 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   const [modalState, setModalState] = useState<boolean>(true);
 
   useEffect(() => {
-    //if (theme === "dark") document.querySelector("html")?.classList.add("dark");
-    //else document.querySelector("html")?.classList.remove("dark");
+    if (theme === "dark") document.querySelector("html")?.classList.add("dark");
+    else document.querySelector("html")?.classList.remove("dark");
     getFeed();
   }, [theme]);
 
