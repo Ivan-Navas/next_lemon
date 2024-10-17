@@ -3,16 +3,19 @@ import Image from "next/image";
 import { BiSolidEditAlt } from "react-icons/bi";
 import Cookies from "js-cookie";
 import { Auth } from "@/helpers/interfaces/user";
+import { useAppContext } from "@/context";
 
 function UserCard() {
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
+  const { setModalState } = useAppContext();
   return (
     <div className="w-100% h-192 bg-white rounded-16 px-16 py-8 flex items-start dark:bg-back">
       <button
         type="button"
         aria-label="iconUser"
         className="p-1 bg-button rounded-100%"
+        onClick={()=>setModalState(true)}
       >
         <Image
           className="rounded-100%"

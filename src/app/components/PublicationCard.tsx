@@ -25,23 +25,36 @@ function PublicationCard({
   date,
   image,
 }: Props) {
-  const { formatDate } = useAppContext();
+  const { formatDate, setModalState } = useAppContext();
   return (
     <div className="flex px-18 py-34">
       <div>
-        <Image
-          className="rounded-full"
-          src={userImage}
-          width={50}
-          height={50}
-          alt="UserImage"
-        />
+        <button
+          aria-label="userImage"
+          type="button"
+          onClick={() => setModalState(true)}
+        >
+          <Image
+            className="rounded-full"
+            src={userImage}
+            width={50}
+            height={50}
+            alt="UserImage"
+          />
+        </button>
       </div>
       <div className="w-100 ml-15">
         <div>
-          <h2 className="text-title text-20 font-medium dark:text-white">
-            {user}
-          </h2>
+          <button
+            type="button"
+            aria-label="userName"
+            onClick={() => setModalState(true)}
+          >
+            <h2 className="text-title text-20 font-medium dark:text-white">
+              {user}
+            </h2>
+          </button>
+
           <h2 className="text-title text-10 font-medium dark:text-9f">
             @{nickName} | {formatDate(new Date(date))}
           </h2>

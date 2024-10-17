@@ -3,6 +3,7 @@ import { BiUserPlus } from "react-icons/bi";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { Auth } from "@/helpers/interfaces/user";
+import { useAppContext } from "@/context";
 
 interface Props {
   id: number;
@@ -14,6 +15,7 @@ interface Props {
 function UserExplorerCard({ id, image, name, nickName }: Props) {
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
+  const { setModalState } = useAppContext();
   return (
     <div>
       <div className="my-18 flex px-14">
@@ -22,9 +24,7 @@ function UserExplorerCard({ id, image, name, nickName }: Props) {
             type="button"
             aria-label="uerExploreButton"
             className="w-50 h-50 z-10"
-            onClick={() => {
-              alert("userExplore");
-            }}
+            onClick={() => setModalState(true)}
           >
             <Image
               className="rounded-100%"
