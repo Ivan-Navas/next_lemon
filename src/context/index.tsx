@@ -44,6 +44,8 @@ const AppContext = createContext<ContextType>({
   feed: [],
   setFeed: () => {},
   formatDate: () => "",
+  modalState: false,
+  setModalState: ()=>{},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -81,10 +83,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   });
   const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([]);
   const [feed, setFeed] = useState<Post[]>([]);
+  const [modalState, setModalState] = useState<boolean>(true);
 
   useEffect(() => {
-    if (theme === "dark") document.querySelector("html")?.classList.add("dark");
-    else document.querySelector("html")?.classList.remove("dark");
+    //if (theme === "dark") document.querySelector("html")?.classList.add("dark");
+    //else document.querySelector("html")?.classList.remove("dark");
     getFeed();
   }, [theme]);
 
@@ -222,6 +225,8 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         feed,
         setFeed,
         formatDate,
+        modalState,
+        setModalState,
       }}
     >
       {children}

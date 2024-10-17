@@ -6,20 +6,22 @@ export type ContextType = {
   setAuthMessage: (authMessage: string) => void;
   registerMessage: Message;
   setRegisterMessage: (registerMessage: Message) => void;
-  hidePassword: boolean,
+  hidePassword: boolean;
   setHidePassword: (hidePassword: boolean) => void;
-  theme: string,
+  theme: string;
   setTheme: (theme: string) => void;
   handleChangeTheme: () => void;
   login: (e: any) => void;
   register: (e: any) => void;
-  auth: Auth
-  handleInputChange: (e: any)=> void;
-  handleInputRegisterChange: (e: any)=> void;
-  getFeed: ()=> void;
+  auth: Auth;
+  handleInputChange: (e: any) => void;
+  handleInputRegisterChange: (e: any) => void;
+  getFeed: () => void;
   userExplorer: UserExplorer[];
-  setUserExplorer: (userExplore: UserExplorer[]) => void,
+  setUserExplorer: (userExplore: UserExplorer[]) => void;
   feed: Post[];
-  setFeed: (post: Post[])=> void;
+  setFeed: (post: Post[]) => void;
   formatDate: (date: Date) => string;
+  modalState: boolean;
+  setModalState: (modalState: boolean) => void;
 };
