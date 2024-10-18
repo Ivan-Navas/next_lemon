@@ -86,7 +86,7 @@ function ModalUser() {
               followers={userInfo.follower?.length}
               following={userInfo.following?.length}
               publications={userInfo.post?.length}
-              date="02/09/2023"
+              date={formatDate(new Date(userInfo.date))}
             />
           </div>
           <hr className="w-100 h-1 bg-button mt-34 mb-41 border-none" />

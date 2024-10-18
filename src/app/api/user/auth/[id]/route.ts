@@ -27,6 +27,7 @@ export const GET = async (req: NextApiRequest, { params }: any) => {
           nickName: user?.nickName,
           image: user?.image,
           bio: user?.bio,
+          date: user?.date,
           post: user?.post,
           follower: user?.followers,
           following: user?.following,

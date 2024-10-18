@@ -35,6 +35,7 @@ const AppContext = createContext<ContextType>({
     nickName: "",
     image: "",
     bio: "",
+    date: "",
   },
   handleInputChange: () => {},
   handleInputRegisterChange: () => {},
@@ -54,6 +55,7 @@ const AppContext = createContext<ContextType>({
     image: "",
     name: "",
     nickName: "",
+    date: "",
   },
   setUserInfo: () => {},
 });
@@ -90,6 +92,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     image: "",
     bio: "",
     post: [],
+    date: "",
   });
   const [userInfo, setUserInfo] = useState<Auth>({
     email: "",
@@ -99,6 +102,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     image: "",
     bio: "",
     post: [],
+    date: "",
   });
 
   const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([]);
@@ -227,13 +231,13 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       const request = await fetch(`/api/user/auth/${id}`, {
         method: "GET",
       });
-      const requestDate: AuthRequest = await request.json();
-      setUserInfo(requestDate.user)
-      if(requestDate.status === "success"){
+      const requestData: AuthRequest = await request.json();
+      setUserInfo(requestData.user);
+      if (requestData.status === "success") {
         setModalState(true);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 

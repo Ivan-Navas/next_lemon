@@ -6,8 +6,8 @@ export interface User {
 }
 
 export interface Message {
-  status: string,
-  message: string,
+  status: string;
+  message: string;
 }
 interface Follow {
   id: number;
@@ -21,6 +21,7 @@ export interface Auth {
   email: string;
   image: string;
   bio: string;
+  date: string;
   post?: Post[];
   follower?: Follow[];
   following?: Follow[];

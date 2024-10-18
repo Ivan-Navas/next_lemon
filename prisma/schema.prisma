@@ -21,6 +21,7 @@ model User {
   post Post[]
   followers Follower[] @relation("FollowerRelation")
   following Follower[] @relation("FollowedRelation")
+  date DateTime @default(now())
 }
 model Follower {
   id Int @id  @default(autoincrement())
