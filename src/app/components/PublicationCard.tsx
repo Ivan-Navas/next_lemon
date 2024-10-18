@@ -52,7 +52,7 @@ function PublicationCard({
             aria-label="userName"
             onClick={() => getUserInfo(id)}
           >
-            <h2 className="text-title text-20 font-medium dark:text-white">
+            <h2 className="text-title text-20 font-medium dark:text-white hover:underline">
               {user}
             </h2>
           </button>
