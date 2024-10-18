@@ -123,8 +123,8 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         body: JSON.stringify(formLoginData),
       });
       const requestData: AuthRequest = await request.json();
-      Cookies.set("token", requestData.token, { expires: 30 });
       if (requestData.status === "success") {
+        Cookies.set("token", requestData.token, { expires: 30 });
         const authRequest = await fetch(
           `/api/user/auth/${requestData.user.id}`,
           {
@@ -160,6 +160,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         message: requestData.message,
       });
       if (requestData.status === "success") {
+        Cookies.set("token", requestData.token, { expires: 30 });
         const authRequest = await fetch(
           `/api/user/auth/${requestData.user.id}`,
           {

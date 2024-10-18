@@ -1,5 +1,6 @@
 import { prisma } from "@/libs/prisma";
 import { NextResponse } from "next/server";
+const jwt = require("jsonwebtoken");
 
 export const POST = async (req: Request) => {
   try {
@@ -23,12 +24,25 @@ export const POST = async (req: Request) => {
             nickName: nickName,
             email: email,
             password: password,
-            image: "https://res.cloudinary.com/ivannavas/image/upload/v1729010512/red_social/perfil_images/q9g7sccte7pgwqli74dy.jpg",
+            image:
+              "https://res.cloudinary.com/ivannavas/image/upload/v1729010512/red_social/perfil_images/q9g7sccte7pgwqli74dy.jpg",
           },
         });
+        const token = jwt.sign(
+          {
+            id: userRegister.id,
+            name: userRegister.name,
+            nickName: userRegister.nickName,
+            email: userRegister.email,
+            image: userRegister.image,
+          },
+          process.env.SECRET,
+          { expiresIn: "30d" }
+        );
         return NextResponse.json({
           status: "success",
           message: "Regístrado con exito",
+          token,
           user: userRegister,
         });
       } else {
