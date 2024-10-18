@@ -58,6 +58,7 @@ const AppContext = createContext<ContextType>({
     date: "",
   },
   setUserInfo: () => {},
+  logOut: () => {},
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -243,6 +244,14 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const logOut = ()=>{
+    Cookies.remove("auth")
+    Cookies.remove("token")
+    setTimeout(() => {
+      window.location.href = "/page/login";
+    }, 1000);
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -271,6 +280,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         getUserInfo,
         userInfo,
         setUserInfo,
+        logOut,
       }}
     >
       {children}

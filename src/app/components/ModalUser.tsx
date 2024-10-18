@@ -17,7 +17,7 @@ import UserStatsCard from "./ui/UserStatsCard";
 import { useAppContext } from "@/context";
 
 function ModalUser() {
-  const { formatDate, modalState, userInfo } = useAppContext();
+  const { formatDate, modalState, userInfo, logOut } = useAppContext();
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
   return (
@@ -35,6 +35,7 @@ function ModalUser() {
             type="button"
             aria-label="ButtonModal"
             className="absolute bottom-4 right-4 flex items-center justify-center"
+            onClick={()=>logOut()}
           >
             <BiLogOut className="w-20 h-20 text-title dark:text-white" />
             <h2 className="text-12 text-title dark:text-white font-bold">

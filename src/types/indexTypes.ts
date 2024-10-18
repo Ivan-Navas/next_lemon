@@ -27,4 +27,5 @@ export type ContextType = {
   getUserInfo: (id: number) => void;
   userInfo: Auth;
   setUserInfo: (userInfo: Auth) => void;
+  logOut: () => void;
 };
