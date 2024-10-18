@@ -123,6 +123,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         body: JSON.stringify(formLoginData),
       });
       const requestData: AuthRequest = await request.json();
+      Cookies.set("token", requestData.token, { expires: 30 });
       if (requestData.status === "success") {
         const authRequest = await fetch(
           `/api/user/auth/${requestData.user.id}`,

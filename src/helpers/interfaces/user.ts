@@ -47,6 +47,7 @@ export interface AuthRequest {
   status: string;
   message: string;
   user: Auth;
+  token: string;
 }
 
 export interface UserExplorerRequest {
