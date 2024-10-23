@@ -1,8 +1,10 @@
 import { prisma } from "@/libs/prisma";
 import { NextResponse } from "next/server";
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 export const POST = async (req: Request) => {
+  const saltRound: number = 10;
   try {
     const { name, nickName, email, password, confirm } = await req.json();
     const exist = await prisma.user.findFirst({
@@ -18,12 +20,13 @@ export const POST = async (req: Request) => {
     }
     if (name && nickName && email && password && confirm) {
       if (password === confirm) {
+        const hashedPassword = await bcrypt.hash(password, saltRound);
         const userRegister = await prisma.user.create({
           data: {
             name: name,
             nickName: nickName,
             email: email,
-            password: password,
+            password: hashedPassword,
             image:
               "https://res.cloudinary.com/ivannavas/image/upload/v1729010512/red_social/perfil_images/q9g7sccte7pgwqli74dy.jpg",
           },
