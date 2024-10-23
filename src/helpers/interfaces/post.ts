@@ -7,8 +7,19 @@ export interface Post {
   image: string,
   author: Auth,
   authorId: number,
+  comment: Stat[] ,
+  share: Stat[],
+  like: Stat[],
+  view: Stat[],
 }
 
+export interface Stat {
+  id: number,
+  date: string,
+  data?: string,
+  authorId: number,
+  postId: number
+}
 export interface FeedRequest {
   status: string,
   message: string,

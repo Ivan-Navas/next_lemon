@@ -7,6 +7,10 @@ export const GET = async (req: NextApiRequest)=>{
   const feed = await prisma.post.findMany(
     {include: {
       author: true,
+      comment: true,
+      share: true,
+      like: true,
+      view: true,
     }}
   )
   return NextResponse.json({

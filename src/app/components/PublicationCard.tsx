@@ -7,15 +7,20 @@ import {
   BiBarChart,
 } from "react-icons/bi";
 import { useAppContext } from "@/context";
+import { Stat } from "@/helpers/interfaces/post";
 
 interface Props {
-  id: number,
+  id: number;
   title: string;
   user: string;
   nickName: string;
   userImage: string;
   date: string;
   image?: string;
+  comment: Stat[];
+  share: Stat[];
+  like: Stat[];
+  view: Stat[];
 }
 
 function PublicationCard({
@@ -26,6 +31,10 @@ function PublicationCard({
   userImage,
   date,
   image,
+  comment,
+  share,
+  like,
+  view,
 }: Props) {
   const { formatDate, getUserInfo } = useAppContext();
   return (
@@ -79,7 +88,7 @@ function PublicationCard({
               <button className="flex items-center justify-center">
                 <BiSolidComment className="text-title text-20 dark:text-lBackMain" />
                 <h2 className="text-10 text-title font-medium dark:text-lBackMain">
-                  20
+                  {comment.length}
                 </h2>
               </button>
             </div>
@@ -87,7 +96,7 @@ function PublicationCard({
               <button className="flex items-center justify-center">
                 <BiShareAlt className="text-title text-20 dark:text-lBackMain" />
                 <h2 className="text-10 text-title font-medium dark:text-lBackMain">
-                  20
+                  {share.length}
                 </h2>
               </button>
             </div>
@@ -95,7 +104,7 @@ function PublicationCard({
               <button className="flex items-center justify-center">
                 <BiSolidHeart className="text-title text-20 dark:text-lBackMain" />
                 <h2 className="text-10 text-title font-medium dark:text-lBackMain">
-                  20
+                  {like.length}
                 </h2>
               </button>
             </div>
@@ -103,7 +112,7 @@ function PublicationCard({
               <button className="flex items-center justify-center">
                 <BiBarChart className="text-title text-20 dark:text-lBackMain" />
                 <h2 className="text-10 text-title font-medium dark:text-lBackMain">
-                  20
+                  {view.length}
                 </h2>
               </button>
             </div>

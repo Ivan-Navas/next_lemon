@@ -4,6 +4,7 @@ import { useAppContext } from "@/context";
 
 function PublicationComponent() {
   const { feed } = useAppContext();
+  console.log(feed)
   return (
     <div className="w-100% mt-33 bg-white rounded-16 dark:bg-back">
       {feed.map((post) => {
@@ -17,6 +18,10 @@ function PublicationComponent() {
               userImage={post.author.image}
               date={post.date}
               image={post.image}
+              comment={post.comment}
+              share={post.share}
+              like={post.like}
+              view={post.view}
             />
             <hr className="h-1 border-none bg-lBackMain dark:bg-title" />
           </div>
