@@ -11,20 +11,25 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @unique
-  name String
-  image String?
-  nickName String
-  password String
-  bio String?
-  post Post[]
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  name      String
+  image     String?
+  nickName  String
+  password  String
+  bio       String?
+  post      Post[]
   followers Follower[] @relation("FollowerRelation")
   following Follower[] @relation("FollowedRelation")
-  date DateTime @default(now())
+  date      DateTime   @default(now())
+  comment Comment[]
+  share Share[]
+  like Like[]
+  view View[]
 }
+
 model Follower {
-  id Int @id  @default(autoincrement())
+  id         Int  @id @default(autoincrement())
   follower   User @relation("FollowerRelation", fields: [followerId], references: [id])
   followed   User @relation("FollowedRelation", fields: [followedId], references: [id])
   followerId Int
@@ -32,10 +37,52 @@ model Follower {
 }
 
 model Post {
+  id       Int      @id @default(autoincrement())
+  date     DateTime @default(now())
+  data     String
+  image    String?
+  author   User     @relation(fields: [authorId], references: [id])
+  authorId Int
+  comment Comment[]
+  share Share[]
+  like Like[]
+  view View[]
+}
+
+model Comment {
   id Int @id @default(autoincrement())
   date DateTime @default(now())
   data String
-  image String?
   author User @relation(fields: [authorId], references: [id])
   authorId Int
+  post Post @relation(fields: [postId], references: [id])
+  postId Int
+}
+
+model Share {
+  id Int @id @default(autoincrement())
+  date DateTime @default(now())
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  post Post @relation(fields: [postId], references: [id])
+  postId Int
+}
+
+model Like {
+  id Int @id @default(autoincrement())
+  date DateTime @default(now())
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  post Post @relation(fields: [postId], references: [id])
+  postId Int
+}
+
+
+model View {
+  id Int @id @default(autoincrement())
+  date DateTime @default(now())
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  post Post @relation(fields: [postId], references: [id])
+  postId Int
 }
