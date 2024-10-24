@@ -3,7 +3,7 @@ import Image from "next/image";
 import {
   BiSolidComment,
   BiShareAlt,
-  BiSolidHeart,
+  BiHeart,
   BiBarChart,
 } from "react-icons/bi";
 import { useAppContext } from "@/context";
@@ -102,7 +102,7 @@ function PublicationCard({
             </div>
             <div>
               <button className="flex items-center justify-center">
-                <BiSolidHeart className="text-title text-20 dark:text-lBackMain" />
+                <BiHeart className="text-title text-20 dark:text-lBackMain" />
                 <h2 className="text-10 text-title font-medium dark:text-lBackMain">
                   {like.length}
                 </h2>
