@@ -4,7 +4,6 @@ import { useAppContext } from "@/context";
 
 function PublicationComponent() {
   const { feed } = useAppContext();
-  console.log(feed)
   return (
     <div className="w-100% mt-33 bg-white rounded-16 dark:bg-back">
       {feed.map((post) => {

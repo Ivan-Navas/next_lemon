@@ -17,6 +17,7 @@ export interface Stat {
   id: number,
   date: string,
   data?: string,
+  file?: string,
   authorId: number,
   postId: number
 }
