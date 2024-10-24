@@ -35,7 +35,7 @@ function ModalUser() {
             type="button"
             aria-label="ButtonModal"
             className="absolute bottom-4 right-4 flex items-center justify-center"
-            onClick={()=>logOut()}
+            onClick={() => logOut()}
           >
             <BiLogOut className="w-20 h-20 text-title dark:text-white" />
             <h2 className="text-12 text-title dark:text-white font-bold">
@@ -62,12 +62,15 @@ function ModalUser() {
             </h2>
           )}
           <div className="w-100 mt-31 flex items-center justify-between">
-            <ButtonUserPage>
-              <BiUserPlus className="w-19 h-19 text-title dark:text-white" />
-              <h2 className="text-12 text-title font-extrabold dark:text-white">
-                Seguir
-              </h2>
-            </ButtonUserPage>
+            {auth.id !== userInfo.id && (
+              <ButtonUserPage>
+                <BiUserPlus className="w-19 h-19 text-title dark:text-white" />
+                <h2 className="text-12 text-title font-extrabold dark:text-white">
+                  Seguir
+                </h2>
+              </ButtonUserPage>
+            )}
+
             <ButtonUserPage>
               <BiBookOpen className="w-19 h-19 text-title dark:text-white" />
               <h2 className="text-12 text-title font-extrabold dark:text-white">
