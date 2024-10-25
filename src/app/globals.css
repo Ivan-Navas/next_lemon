@@ -68,3 +68,11 @@ input {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Oculta el scrollbar en navegadores basados en WebKit */
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Oculta el scrollbar en Internet Explorer */
+  scrollbar-width: none;     /* Oculta el scrollbar en Firefox */
+}
