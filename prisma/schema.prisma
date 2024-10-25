@@ -53,7 +53,7 @@ model Comment {
   id Int @id @default(autoincrement())
   date DateTime @default(now())
   data String
-  file String
+  file String?
   author User @relation(fields: [authorId], references: [id])
   authorId Int
   post Post @relation(fields: [postId], references: [id])
