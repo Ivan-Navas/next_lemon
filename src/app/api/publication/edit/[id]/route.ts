@@ -49,6 +49,13 @@ export const PUT = async (req: any, { params }: any) => {
       data: {
         image: response.secure_url,
       },
+      include: {
+        author: true,
+        comment: true,
+        like: true,
+        share: true,
+        view: true,
+      }
     });
 
     return NextResponse.json({

@@ -30,11 +30,5 @@ export interface FeedRequest {
 export interface PostRequest {
   status: string,
   message: string,
-  publication: {
-    id: number,
-    data: string,
-    date: string,
-    author: number,
-    image: string,
-  }
+  publication: Post,
 }

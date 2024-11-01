@@ -3,9 +3,11 @@ import { Auth } from "@/helpers/interfaces/user";
 import React, { useState } from "react";
 import { BiPaperclip, BiSolidSend } from "react-icons/bi";
 import Cookies from "js-cookie";
-import { PostRequest } from "@/helpers/interfaces/post";
+import { Post, PostRequest } from "@/helpers/interfaces/post";
+import { useAppContext } from "@/context";
 
 function PublicArea() {
+  const { feed, setFeed } = useAppContext();
   const cookies = Cookies.get("auth");
   const auth: Auth = cookies ? JSON.parse(cookies) : null;
   const [file, setFile] = useState<any>(null);
@@ -20,6 +22,7 @@ function PublicArea() {
           body: JSON.stringify({ data: publiData }),
         });
         const data: PostRequest = await request.json();
+
         if (file && data) {
           const formData = new FormData();
           formData.append("file", file);
@@ -30,6 +33,10 @@ function PublicArea() {
               body: formData,
             }
           );
+          const addImageRes: PostRequest = await addImageRequest.json();
+          setFeed([addImageRes.publication, ...feed]);
+        } else {
+          setFeed([data.publication, ...feed]);
         }
       }}
     >

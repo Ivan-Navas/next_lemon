@@ -20,6 +20,13 @@ export const POST = async (req: Request, { params }: any) => {
           data: data,
           authorId: exist.id,
         },
+        include: {
+          author: true,
+          comment: true,
+          like: true,
+          share: true,
+          view: true,
+        }
       });
       //devolver la respuesta
       return NextResponse.json({
