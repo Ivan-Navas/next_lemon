@@ -3,6 +3,7 @@ import { Auth } from "@/helpers/interfaces/user";
 import React, { useState } from "react";
 import { BiPaperclip, BiSolidSend } from "react-icons/bi";
 import Cookies from "js-cookie";
+import { PostRequest } from "@/helpers/interfaces/post";
 
 function PublicArea() {
   const cookies = Cookies.get("auth");
@@ -18,8 +19,18 @@ function PublicArea() {
           method: "POST",
           body: JSON.stringify({ data: publiData }),
         });
-        const data = await request.json();
-        console.log(data);
+        const data: PostRequest = await request.json();
+        if (file && data) {
+          const formData = new FormData();
+          formData.append("file", file);
+          const addImageRequest = await fetch(
+            `/api/publication/edit/${data.publication.id}`,
+            {
+              method: "PUT",
+              body: formData,
+            }
+          );
+        }
       }}
     >
       <textarea

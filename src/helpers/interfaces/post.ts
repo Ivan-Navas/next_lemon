@@ -26,3 +26,15 @@ export interface FeedRequest {
   message: string,
   feed: Post[],
 }
+
+export interface PostRequest {
+  status: string,
+  message: string,
+  publication: {
+    id: number,
+    data: string,
+    date: string,
+    author: number,
+    image: string,
+  }
+}
