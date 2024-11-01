@@ -1,17 +1,16 @@
 import React from "react";
-import Image from "next/image";
 import {
   BiSolidComment,
   BiShareAlt,
   BiHeart,
   BiBarChart,
 } from "react-icons/bi";
-import { useAppContext } from "@/context";
 import { Stat } from "@/helpers/interfaces/post";
 import InfoUserPublication from "./ui/InfoUserPublication";
 
 interface Props {
   id: number;
+  postId: number;
   title: string;
   user: string;
   nickName: string;
@@ -26,6 +25,7 @@ interface Props {
 
 function PublicationCard({
   id,
+  postId,
   title,
   user,
   nickName,
@@ -37,7 +37,6 @@ function PublicationCard({
   like,
   view,
 }: Props) {
-  const { formatDate, getUserInfo } = useAppContext();
   return (
     <div className="px-18 py-34">
       <InfoUserPublication
@@ -68,7 +67,26 @@ function PublicationCard({
             </button>
           </div>
           <div>
-            <button className="flex items-center justify-center">
+            <button
+              className="flex items-center justify-center"
+              onClick={async () => {
+                const request = await fetch(
+                  `/api/publication/like/${postId}/${id}`,
+                  {
+                    method: "POST",
+                  }
+                );
+                const data = await request.json();
+                if (data.message === "El like existe") {
+                  const request2 = await fetch(
+                    `/api/publication/dislike/${postId}/${id}`,
+                    {
+                      method: "DELETE",
+                    }
+                  );
+                }
+              }}
+            >
               <BiHeart className="text-title text-20 dark:text-lBackMain" />
               <h2 className="text-10 text-title font-medium dark:text-lBackMain">
                 {like.length}

@@ -11,6 +11,7 @@ function PublicationComponent() {
           <div key={post.id}>
             <PublicationCard
               id={post.author.id}
+              postId={post.id}
               title={post.data}
               user={post.author.name}
               nickName={post.author.nickName}

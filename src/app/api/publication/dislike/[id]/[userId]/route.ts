@@ -3,12 +3,10 @@ import { NextResponse } from "next/server";
 
 export const DELETE = async (req: any, { params }: any) => {
   const { id, userId } = params;
-
   //verificar existe el like
   const exist = await prisma.like.findFirst({
     where: {
-      authorId: parseInt(userId),
-      postId: parseInt(id),
+      AND: [{ authorId: parseInt(userId) }, { postId: parseInt(id) }],
     },
   });
   if (!exist) {
