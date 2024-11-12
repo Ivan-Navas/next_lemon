@@ -28,4 +28,5 @@ export type ContextType = {
   userInfo: Auth;
   setUserInfo: (userInfo: Auth) => void;
   logOut: () => void;
+  likeFun: (postId: number, id: number) => void
 };

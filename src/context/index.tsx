@@ -59,6 +59,7 @@ const AppContext = createContext<ContextType>({
   },
   setUserInfo: () => {},
   logOut: () => {},
+  likeFun: () => {}
 });
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -244,13 +245,26 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const logOut = ()=>{
-    Cookies.remove("auth")
-    Cookies.remove("token")
+  const likeFun = async (postId: number, id: number) => {
+    const request = await fetch(`/api/publication/like/${postId}/${id}`, {
+      method: "POST",
+    });
+    const data = await request.json();
+    if (data.message === "El like existe") {
+      const request2 = await fetch(`/api/publication/dislike/${postId}/${id}`, {
+        method: "DELETE",
+      });
+      const dataD = await request2.json();
+    }
+  };
+
+  const logOut = () => {
+    Cookies.remove("auth");
+    Cookies.remove("token");
     setTimeout(() => {
       window.location.href = "/page/login";
     }, 1000);
-  }
+  };
 
   return (
     <AppContext.Provider
@@ -281,6 +295,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         userInfo,
         setUserInfo,
         logOut,
+        likeFun,
       }}
     >
       {children}
