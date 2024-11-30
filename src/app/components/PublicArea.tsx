@@ -52,17 +52,19 @@ function PublicArea() {
       ></textarea>
       <div className="bg-lBackMain rounded-b-16 mt-0 flex justify-end dark:bg-title">
         <input
+          className="hidden"
           type="file"
           title="file"
+          id="file"
           onChange={(e) => {
             if (e.target && e.target.files && e.target.files.length > 0) {
               setFile(e.target.files[0]);
             }
           }}
         />
-        <div className="flex items-center justify-center">
-          <BiPaperclip className="w-21 h-21 text-title dark:text-lFontMain" />
-        </div>
+        <label htmlFor="file">
+        <BiPaperclip className="w-21 h-21 text-title dark:text-lFontMain inline-block cursor-pointer" />
+        </label>
         <button type="submit" aria-label="submit" className="mr-28 ml-7">
           <BiSolidSend className="w-21 h-21 text-title dark:text-lFontMain" />
         </button>
