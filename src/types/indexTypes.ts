@@ -21,9 +21,13 @@ export type ContextType = {
   setUserExplorer: (userExplore: UserExplorer[]) => void;
   feed: Post[];
   setFeed: (post: Post[]) => void;
+  commentPost: Post;
+  setCommentPost: (commentPost: Post) => void;
   formatDate: (date: Date) => string;
   modalState: boolean;
   setModalState: (modalState: boolean) => void;
+  modalCommentState: boolean;
+  setModalCommentState: (modalCommentState: boolean) => void;
   getUserInfo: (id: number) => void;
   userInfo: Auth;
   setUserInfo: (userInfo: Auth) => void;

@@ -44,9 +44,32 @@ const AppContext = createContext<ContextType>({
   setUserExplorer: () => {},
   feed: [],
   setFeed: () => {},
+  commentPost: {
+    id: 0,
+    author: {
+      bio: "",
+      date: "",
+      email: "",
+      id: 0,
+      image: "",
+      name: "",
+      nickName: ""
+    },
+    authorId: 0,
+    comment: [],
+    data: "",
+    date: "",
+    image: "",
+    like: [],
+    share: [],
+    view: [],
+  },
+  setCommentPost: () => {},
   formatDate: () => "",
   modalState: false,
   setModalState: () => {},
+  modalCommentState: false,
+  setModalCommentState: () => {},
   getUserInfo: () => {},
   userInfo: {
     id: 0,
@@ -110,6 +133,28 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   const [userExplorer, setUserExplorer] = useState<UserExplorer[]>([]);
   const [feed, setFeed] = useState<Post[]>([]);
   const [modalState, setModalState] = useState<boolean>(false);
+  const [modalCommentState, setModalCommentState] = useState<boolean>(false);
+  const [commentPost, setCommentPost] = useState<Post>({
+    author: {
+      bio: "",
+      date: "",
+      email: "",
+      id: 0,
+      image: "",
+      name: "",
+      nickName: ""
+      
+    },
+    authorId: 0,
+    comment: [],
+    data: "",
+    date: "",
+    id: 0,
+    image: "",
+    like: [],
+    share: [],
+    view: []
+  });
 
   useEffect(() => {
     if (theme === "dark") document.querySelector("html")?.classList.add("dark");
@@ -288,9 +333,13 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         getFeed,
         feed,
         setFeed,
+        commentPost,
+        setCommentPost,
         formatDate,
         modalState,
         setModalState,
+        modalCommentState,
+        setModalCommentState,
         getUserInfo,
         userInfo,
         setUserInfo,

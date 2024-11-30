@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import UserExplorer from "@/app/components/ui/feedComponents/UserExplorer";
 import PublicationComponent from "@/app/components/ui/feedComponents/PublicationComponent";
 import ModalUser from "@/app/components/ModalUser";
+import ModalComment from "@/app/components/ModalComment";
 
 function Page() {
   useEffect(() => {
@@ -13,6 +14,7 @@ function Page() {
   return (
     <div className="flex justify-between bg-lBackMain dark:bg-title">
       <div className="w-421 relative">
+        <ModalComment />
         <ModalUser />
         <div className="pt-16 pl-16">
         <UserCard />
